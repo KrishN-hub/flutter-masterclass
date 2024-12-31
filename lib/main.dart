@@ -10,6 +10,10 @@ void main() {
 }
 
 String degree = "";
+bool chv1 = false;
+bool chv2 = false;
+bool chv3 = false;
+bool chv4 = false;
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -49,70 +53,138 @@ class _MyAppState extends State<MyApp> {
           Container(
             height: 380,
             //color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  //name
-                  TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      hintText: "Enter Your Name",
-                      labelText: "Your name",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    //name
+                    TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        hintText: "Enter Your Name",
+                        labelText: "Your name",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.phone),
-                      hintText: "Enter Your whatsApp number",
-                      labelText: "WhatsApp No",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
+                    SizedBox(height: 10),
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.phone),
+                        hintText: "Enter Your whatsApp number",
+                        labelText: "WhatsApp No",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "your Degree",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                          value: "UG",
-                          groupValue: degree,
-                          onChanged: (value) {
-                            print(value);
-                          }),
-                      Text("UG Student"),
-
-                      Radio(
-                          value: "UG",
-                          groupValue: degree,
-                          onChanged: (value) {
-                            print(value);
-                          }),
-                      Text("PG Student"),
-
-                      Radio(
-                          value: "UG",
-                          groupValue: degree,
-                          onChanged: (value) {
-                            print(value);
-                          }),
-                      Text("DEV Student"),
-                    ],
-                  )
-                ],
+                    Text(
+                      "your Degree",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                            value: "UG",
+                            groupValue: degree,
+                            onChanged: (value) {
+                              setState(() {
+                                degree = value.toString();
+                              });
+                              print(value);
+                            }),
+                        Text("UG Student"),
+                        Radio(
+                            value: "UG",
+                            groupValue: degree,
+                            onChanged: (value) {
+                              setState(() {
+                                degree = value.toString();
+                              });
+                              print(value);
+                            }),
+                        Text("PG Student"),
+                        Radio(
+                            value: "UG",
+                            groupValue: degree,
+                            onChanged: (value) {
+                              setState(() {
+                                degree = value.toString();
+                              });
+                              print(value);
+                            }),
+                        Text("DEV Student"),
+                      ],
+                    ),
+                    //favorite program
+                    Text(
+                      "favourite Program",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                            value: chv1,
+                            onChanged: (value) {
+                              setState(() {
+                                chv1 = value ?? false;
+                              });
+                              print(value);
+                            }),
+                        Text("Laravel"),
+                        Checkbox(
+                            value: chv2,
+                            onChanged: (value) {
+                              setState(() {
+                                chv2 = value ?? false;
+                              });
+                              print(value);
+                            }),
+                        Text("Flutter"),
+                        Checkbox(
+                            value: chv3,
+                            onChanged: (value) {
+                              setState(() {
+                                chv3 = value ?? false;
+                              });
+                              print(value);
+                            }),
+                        Text("React"),
+                        Checkbox(
+                            value: chv4,
+                            onChanged: (value) {
+                              setState(() {
+                                chv4 = value ?? false;
+                              });
+                              print(value);
+                            }),
+                        Text("Jason"),
+                      ],
+                    ),
+                    TextField(
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        hintText: "Enter Your Feedback",
+                        labelText: "Your FeedBack",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
