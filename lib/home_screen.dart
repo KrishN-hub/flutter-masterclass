@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:master_class/favourite_controller.dart';
+import 'package:master_class/image_picker_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,15 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  FavouriteController controller = Get.put(FavouriteController());
-  /*List<String> fruitList = [
-    'Apple',
-    'Banana',
-    'Mango',
-    'Orange',
-  ];
+  ImagePickerController controller = Get.put(ImagePickerController());
 
-  List<String> tempFruitList = [];*/
+  List<String> tempFruitList = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -31,31 +27,29 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text('GetX tutorials'),
         ),
-        body: ListView.builder(
-            itemCount: controller.fruitList.length,
-            itemBuilder: (context, Index) {
-              return Card(
-                  child: ListTile(
-                      onTap: () {
-                        if (controller.tempFruitList
-                            .contains(controller.fruitList[Index].toString())) {
-                          controller.removeFromFavourite(
-                              controller.fruitList[Index].toString());
-                        } else {
-                          controller.addToFavourite(
-                              controller.fruitList[Index].toString());
-                        }
+        body: (Column(
+          children: [
+            Obx(() {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: CircleAvatar(
+                        radius: 60,
+                        backgroundImage: controller.imagePath.isNotEmpty
+                            ? FileImage(File(controller.imagePath.toString()))
+                            : null),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        controller.getImage();
                       },
-                      title: Text(controller.fruitList[Index].toString()),
-                      trailing: Obx(
-                        () => Icon(
-                          Icons.favorite,
-                          color: controller.tempFruitList.contains(
-                                  controller.fruitList[Index].toString())
-                              ? Colors.red
-                              : Colors.white,
-                        ),
-                      )));
-            }));
+                      child: Text('Picker Image'))
+                ],
+              );
+            })
+          ],
+        )));
   }
 }
