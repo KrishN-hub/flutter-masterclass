@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:master_class/counter_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,22 +10,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int x = 20;
+  final CounterController controller = Get.put(CounterController());
+  int counter = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('GetX tutorials'),
-      ),
-      body: Center(
-        child: Text(
-          x.toString(),
-          style: TextStyle(
-            fontSize: 60, 
-          ),
+        appBar: AppBar(
+          title: Text('GetX tutorials'),
         ),
-      ),
-    );
+        body: Center(child: Obx(() {
+          print('rebuild');
+          return Text(
+            controller.counter.toString(),
+            style: TextStyle(
+              fontSize: 60,
+            ),
+          );
+        })),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          controller.incrementCounter();
+        }));
   }
 }
