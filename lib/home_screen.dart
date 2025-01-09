@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:master_class/image_picker_controller.dart';
+
+import 'package:master_class/login_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ImagePickerController controller = Get.put(ImagePickerController());
+  LoginController controller = Get.put(LoginController());
 
   List<String> tempFruitList = [];
   @override
@@ -27,29 +28,41 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text('GetX tutorials'),
         ),
-        body: (Column(
-          children: [
-            Obx(() {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: CircleAvatar(
-                        radius: 60,
-                        backgroundImage: controller.imagePath.isNotEmpty
-                            ? FileImage(File(controller.imagePath.toString()))
-                            : null),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        controller.getImage();
-                      },
-                      child: Text('Picker Image'))
-                ],
-              );
-            })
-          ],
-        )));
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: (Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: controller.emailController.value,
+                  decoration: InputDecoration(hintText: 'Email'),
+                ),
+                TextFormField(
+                  controller: controller.passwordController.value,
+                  decoration: InputDecoration(hintText: 'Password'),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Obx(() {
+                  return InkWell(
+                    onTap: () {
+                      controller.loginApi();
+                    },
+                    child: controller.loading.value
+                        ? CircularProgressIndicator()
+                        : Container(
+                            color: Colors.grey,
+                            child: Center(
+                              child: Text('Login'),
+                            ),
+                          ),
+                  );
+                })
+              ])),
+        ));
   }
 }
