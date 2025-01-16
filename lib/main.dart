@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:master_class/res/routes/routes.dart';
 import 'package:get/get.dart';
+import 'package:master_class/res/routes/routes.dart';
+
 import 'package:master_class/view/splash_screen.dart';
 
 void main() => runApp(MyApp());
