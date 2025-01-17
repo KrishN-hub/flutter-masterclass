@@ -60,7 +60,6 @@ class _LoginViewState extends State<LoginView> {
                   TextFormField(
                     controller: loginVM.passwordController.value,
                     focusNode: loginVM.passwordFocusNode.value,
-
                     obscureText: true,
                     obscuringCharacter: '*',
                     validator: (value) {
@@ -70,7 +69,7 @@ class _LoginViewState extends State<LoginView> {
                     },
                     onFieldSubmitted: (value) {},
                     decoration: InputDecoration(
-                        hintText: 'email_hint'.tr,
+                        hintText: 'password_hint'.tr,
                         border: OutlineInputBorder()),
                   ),
                 ],
@@ -79,12 +78,17 @@ class _LoginViewState extends State<LoginView> {
             const SizedBox(
               height: 40,
             ),
-            RoundButton(
-                width: 200,
-                title: 'login'.tr,
-                onpress: () {
-                  if (_formkey.currentState!.validate()) {}
-                })
+            Obx(
+              () => RoundButton(
+                  width: 200,
+                  title: 'login'.tr,
+                  loading: loginVM.loading.value,
+                  onpress: () {
+                    if (_formkey.currentState!.validate()) {
+                      loginVM.loginApi();
+                    }
+                  }),
+              ),
           ],
         ),
       ),
