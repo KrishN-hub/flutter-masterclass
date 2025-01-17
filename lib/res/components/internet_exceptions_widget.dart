@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:master_class/res/colors/app_color.dart';
-import 'package:master_class/res/components/internet_exceptions_widget.dart';
 
 class InternetExceptionsWidget extends StatefulWidget {
   final VoidCallback onPress;

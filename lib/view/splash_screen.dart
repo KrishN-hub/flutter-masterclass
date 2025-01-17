@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:master_class/res/components/round_button.dart';
+import 'package:master_class/view_models/services/splash_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,24 +10,23 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SplashService splashScreen = SplashService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    splashScreen.isLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('email_hint'.tr),
-      ),
-      body: Column(
-        children: [
-          RoundButton(
-            title: 'Login',
-            onpress: () {},
-          ),
-          RoundButton(
-            title: 'SignUp',width: double.infinity,
-            onpress: () {},
-          ),
-        ],
-      ),
+      backgroundColor: Colors.teal,
+      body: Center(
+          child: Text(
+        'welcome_back'.tr,
+        textAlign: TextAlign.center,
+      )),
     );
   }
 }
