@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:master_class/res/components/round_button.dart';
 import 'package:master_class/utils/utils.dart';
-import 'package:master_class/view_models/controller/login_view_model.dart';
+import 'package:master_class/view_models/controller/login/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
